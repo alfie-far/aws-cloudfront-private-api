@@ -1,0 +1,20 @@
+{
+  "name": "sample-edge",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "sst": "3.9.37",
+    "@aws-sdk/client-s3": "^3.540.0",
+    "@aws-sdk/s3-request-presigner": "^3.540.0"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "8.10.147"
+  }
+}
