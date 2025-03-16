@@ -1,6 +1,6 @@
 import { Resource } from 'sst';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
-import * as crypto from "crypto";
+import * as crypto from 'crypto';
 import {
   S3Client,
   GetObjectCommand,
@@ -41,14 +41,14 @@ export async function latest() {
   return {
     statusCode: 200,
     body: JSON.stringify({
-      message: "Go Serverless v3.0! Your function executed successfully!",
+      message: 'Go Serverless v3.0! Your function executed successfully!',
       output: {
-        test: "PASS"
+        test: 'PASS',
       },
     }),
     headers: {
-      "Content-Type": "application/json",
-      "X-QC-ABC": crypto.randomBytes(64).toString("hex"),
+      'Content-Type': 'application/json',
+      'X-QC-ABC': crypto.randomBytes(64).toString('hex'),
     },
   };
 }
