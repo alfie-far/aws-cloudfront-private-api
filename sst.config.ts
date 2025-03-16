@@ -67,7 +67,8 @@ export default $config({
     // Create a VPC Endpoint for API Gateway
     const vpcEndpoint = new aws.ec2.VpcEndpoint('ApiGatewayVpcEndpoint', {
       vpcId: vpc.id,
-      serviceName: pulumi.interpolate`com.amazonaws.${region}.execute-api`, // API Gateway VPC Endpoint Service
+      // API Gateway VPC Endpoint Service
+      serviceName: pulumi.interpolate`com.amazonaws.${region}.execute-api`,
       vpcEndpointType: 'Interface', // Supports Private API Gateway
       subnetIds: [subnet.id],
       securityGroupIds: [securityGroup.id],
