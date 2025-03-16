@@ -3,6 +3,9 @@
 import * as pulumi from '@pulumi/pulumi';
 import * as aws from '@pulumi/aws';
 
+// Constants
+const CERTIFICATE_ARN = 'arn:aws:acm:ap-southeast-2:610034861450:certificate/69d106cf-0341-43bd-9a26-421dc57cdc04';
+
 export default $config({
   app(input) {
     return {
@@ -14,10 +17,11 @@ export default $config({
   },
 
   async run() {
-    const certificateArn =
-      'arn:aws:acm:ap-southeast-2:610034861450:certificate/69d106cf-0341-43bd-9a26-421dc57cdc04';
-    const region = aws.getRegionOutput().name;
-    const accountId = aws.getCallerIdentityOutput({}).accountId;
+    const regionOutput = aws.getRegionOutput();
+    const callerIdentityOutput = aws.getCallerIdentityOutput();
+
+    const region = regionOutput.name;
+    const accountId = callerIdentityOutput.accountId;
 
     // Create a VPC
     const vpc = new aws.ec2.Vpc('MyVPC', {
@@ -32,7 +36,7 @@ export default $config({
       vpcId: vpc.id,
       cidrBlock: '10.0.1.0/24',
       mapPublicIpOnLaunch: true,
-      availabilityZone: 'ap-southeast-2a', // Change as needed  pulumi.interpolate`${region}a`
+      availabilityZone: pulumi.interpolate`${region}a`, // Change as needed
       tags: { Name: 'DefaultSubnet' },
     });
 
@@ -107,7 +111,7 @@ export default $config({
       );
 
     const gatewayDomainName = new aws.apigateway.DomainName('private-gateway-dns', {
-      certificateArn: certificateArn,
+      certificateArn: CERTIFICATE_ARN,
       endpointConfiguration: {
         types: ['PRIVATE'],
       },
@@ -265,7 +269,7 @@ export default $config({
       protocol: 'TLS',
       sslPolicy: 'ELBSecurityPolicy-TLS13-1-2-2021-06',
       alpnPolicy: 'HTTP2Optional',
-      certificateArn: certificateArn, // Replace with actual ACM certificate ARN
+      certificateArn: CERTIFICATE_ARN, // Replace with actual ACM certificate ARN
       defaultActions: [
         {
           type: 'forward',
