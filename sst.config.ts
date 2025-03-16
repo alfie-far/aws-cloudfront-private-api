@@ -4,7 +4,8 @@ import * as pulumi from '@pulumi/pulumi';
 import * as aws from '@pulumi/aws';
 
 // Constants
-const CERTIFICATE_ARN = 'arn:aws:acm:ap-southeast-2:610034861450:certificate/69d106cf-0341-43bd-9a26-421dc57cdc04';
+const CERTIFICATE_ARN =
+  'arn:aws:acm:ap-southeast-2:610034861450:certificate/69d106cf-0341-43bd-9a26-421dc57cdc04';
 
 export default $config({
   app(input) {
@@ -202,7 +203,7 @@ export default $config({
       tags: { Name: 'LbSecurityGroup' },
     });
 
-    // Step 4: Create a Network Load Balancer (NLB) inside the Private Subnet
+    // Create a Network Load Balancer (NLB) inside the Private Subnet
     const nlb = new aws.lb.LoadBalancer('APILinkNLB', {
       internal: true, // Internal LB for VPC Link
       loadBalancerType: 'network',
@@ -223,17 +224,6 @@ export default $config({
       subnetIds: [subnet.id], // Attach to the correct subnet
       tags: { Name: 'VPCLinkForHTTPSAPIs' },
     });
-
-    // O
-
-    // Step 5: Create a Target Group for the Load Balancer
-    // const httpTargetGroup = new aws.lb.TargetGroup("HTTPTargetGroup", {
-    //   port: 80,
-    //   protocol: "HTTPS",
-    //   vpcId: vpc.id,
-    //   targetType: "ip", // Targeting Private API Gateway via VPC Endpoint IP
-    //   tags: { Name: "HTTPTargetGroup" },
-    // });
 
     // Step 5: Create a Target Group for the Load Balancer
     const httpsTargetGroup = new aws.lb.TargetGroup('HTTPSTargetGroup', {
@@ -273,7 +263,7 @@ export default $config({
       defaultActions: [
         {
           type: 'forward',
-          targetGroupArn: httpsTargetGroup.arn, //"arn:aws:elasticloadbalancing:ap-southeast-2:610034861450:targetgroup/YOUR_TARGET_GROUP_ID" // Replace with actual Target Group ARN
+          targetGroupArn: httpsTargetGroup.arn, // Replace with different Target Group ARN depending on your use-case
         },
       ],
     });
