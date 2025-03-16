@@ -1,7 +1,17 @@
 {
-  "trailingComma": "es2020",
-  "tabWidth": 4,
+  "arrowParens": "avoid",
+  "bracketSpacing": false,
+  "bracketSameLine": true,
+  "htmlWhitespaceSensitivity": "strict",
+  "insertPragma": true,
+  "jsxSingleQuote": false,
+  "printWidth": 80,
+  "proseWrap": "always",
+  "quoteProps": "consistent",
+  "requirePragma": true,
   "semi": false,
-  "doubleQuote": true,
-  "singleQuote": false
+  "singleQuote": false,
+  "tabWidth": 4,
+  "trailingComma": "none",
+  "useTabs": true
 }
