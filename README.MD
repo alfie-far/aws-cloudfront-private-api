@@ -11,6 +11,10 @@ The goal of this project is to:
 - Expose the private API through a public API using a Network Load Balancer.
 - Ensure secure communication and controlled access.
 
+----------------------------------------------------------------
+![Architecture Diagram](./architecture_diagram.jpeg)
+----------------------------------------------------------------
+
 ## Infrastructure Components
 
 The following AWS services are used in this project:
